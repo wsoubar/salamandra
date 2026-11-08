@@ -44,3 +44,48 @@
   .metric-card{padding:11px;min-height:100px}
   .metric-label{left:45px}
 }
+/* Tema escuro para todo o playground. */
+:root{color-scheme:dark;color:#eee8e3;background:#171513}
+body{background:#171513;color:#eee8e3}
+.sidebar,.topbar,.flow-panel,.publish-panel,.messages-panel,.flow-connector .connector-dot,.consumer-node,.flow-node{background:#211e1b;border-color:#35312d}
+.sidebar,.topbar{border-color:#35312d}
+.brand,.breadcrumb b,.welcome h1,.section-heading h2,.panel-heading h2,.flow-node h3,.consumer-node h3,.metric-card strong{color:#f1ece7}
+.brand small,.side-bottom,.breadcrumb,.welcome p,.section-heading p,.metric-card small,.node-type,.flow-node p,.node-foot,.partition-count,.consumer-node p,.message-coords,.message-meta time,footer{color:#a49a92}
+.side-label,.metric-label,.panel-kicker{color:#91877f}
+.nav-item.active{background:#3b2721;color:#ffa078}
+.topic-nav,.pause-button,.publish-panel select,.publish-panel input,.publish-panel textarea{background:#282421;border-color:#3c3732;color:#eee7e0}
+.topic-nav.selected{background:#342923;color:#ffd1bd}
+.topic-create input{background:#282421;border-color:#3c3732;color:#f4eee8}
+.metric-card{background:#211e1b;border-color:#35312d;box-shadow:0 2px 5px #0002}
+.orange,.producer-icon,.message-marker{background:#3b2922;color:#ff9a72}
+.blue,.consumer-icon.blue{background:#242f3b;color:#91b9e8}
+.violet,.topic-icon,.consumer-icon.violet{background:#302942;color:#b7a0ed}
+.green{background:#22342c;color:#77c79c}
+.broker-state{color:#77c79c!important}
+.flow-panel,.publish-panel,.messages-panel{box-shadow:0 2px 5px #0002}
+.flow-node,.consumer-node{border-color:#39342f}
+.connector-line{background:#423c36}
+.connector-dot{background:#282421;border-color:#423c36;color:#c7bcb3}
+.partition-bars span{background:#302b27;color:#b7aca3}
+.partition-bars span.filled{background:#3b2922;color:#ffa078}
+.partition-bars i{background:#625950}
+.partition-bars .filled i{background:#ee825d}
+.message-item{border-color:#36312d}
+.message-item pre,.code-tag,.message-total,.local-tag{background:#2a2622;color:#c2b7ae}
+.message-meta code{color:#e9e1da}
+.view-all{border-color:#38332e;color:#c4b9b0}
+.empty-state{color:#a49a92}
+.empty-state b{color:#ddd4cc}
+.learning-note{background:#322720;border-color:#49362b}
+.learning-note p{color:#c4a994}
+.learning-note b{color:#f0c9ad}
+.pause-button{color:#c2b8b0}
+.simulation,.node-live,.consumer-active{color:#79c79b}
+.live-pill{background:#23352b;color:#8fd0a9}
+.status{color:#f0c9ad}
+.topic-label button{color:#c2b8b0}
+.publish-button{background:#d95c39}
+.online-dot,.simulation i,.broker-state i,.live-pill i{background:#61bd8d}
+.welcome-art .orbit{border-color:#4e3930}
+.spark{background:#df754f}
+::selection{background:#87503b;color:white}
