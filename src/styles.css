@@ -3,3 +3,44 @@
 @media(max-width:1050px){.content-wrap{padding:28px 24px}.sidebar{width:210px}.flow-panel{grid-template-columns:minmax(130px,1fr) 34px minmax(150px,1fr) 34px minmax(165px,1fr);padding:15px 12px}.flow-node{padding:10px}.lower-grid{grid-template-columns:1fr 1.1fr;gap:10px}.welcome-art{margin-right:10px}}
 @media(max-width:760px){.sidebar{width:62px;padding:18px 8px}.brand{padding:0 5px 29px}.brand>span:last-child,.side-label,.nav-item:not(.active),.nav-item.active{font-size:0}.brand-mark{width:34px;height:34px;flex:none}.nav-item{justify-content:center;padding:9px}.nav-item span{font-size:17px}.topic-label{justify-content:center;padding:0;margin:22px 0 9px}.topic-label button{font-size:18px}.topic-nav{font-size:0;justify-content:center;padding:10px}.topic-dot{width:8px;height:8px}.topic-count,.topic-create,.side-bottom{display:none}.topbar{padding:0 16px}.content-wrap{padding:24px 16px}.welcome-art{opacity:.55;width:110px;margin:0}.welcome-art>span{right:32px}.orbit-one{width:100px}.orbit-two{width:90px}.spark-a{right:15px}.spark-b{right:90px}.metrics{grid-template-columns:repeat(2,1fr);gap:9px;margin:18px 0 27px}.metric-card{min-height:106px;padding:13px}.metric-icon{margin-bottom:9px}.metric-label{left:47px;top:19px}.flow-panel{grid-template-columns:1fr;gap:9px;padding:13px}.flow-node{height:auto;min-height:91px}.flow-connector{height:17px;width:100%;display:flex;align-items:center;justify-content:center}.connector-line{position:absolute;top:8px;width:1px;height:14px}.connector-dot{top:0}.flow-connector small{display:none}.consumer-stack{grid-template-columns:1fr 1fr}.consumer-node{min-width:0}.consumer-node h3{font-size:9px}.lower-grid{grid-template-columns:1fr;margin-top:14px}.messages-panel{min-height:350px}.welcome h1{font-size:28px}.welcome p{font-size:10px;max-width:280px}.section-heading h2{font-size:14px}.section-heading p{font-size:9px}footer{font-size:8px}.breadcrumb{font-size:10px}}
 @media(max-width:420px){.content-wrap{padding:20px 11px}.welcome-art{display:none}.consumer-stack{grid-template-columns:1fr}.top-right{gap:10px}.simulation{font-size:9px}.metrics{gap:7px}.metric-card strong{font-size:20px}}
+/* Galaxy S23 and other narrow phones: turn the desktop sidebar into a compact topic strip. */
+@media(max-width:600px){
+  .workspace{display:block}
+  .sidebar{width:100%;height:auto;padding:9px 12px 7px;border-right:0;border-bottom:1px solid #ebe9e6;display:grid;grid-template-columns:auto 1fr;align-items:center;gap:8px 12px}
+  .brand{padding:0;gap:8px;font-size:12px}
+  .brand-mark{width:30px;height:30px;font-size:19px;border-radius:9px}
+  .brand small{font-size:8px}
+  .side-label:not(.topic-label),.nav-item,.side-bottom{display:none}
+  .topic-label{grid-column:1;grid-row:2;margin:0;padding:0;justify-content:flex-start;font-size:8px}
+  .topic-label button{font-size:17px;margin-left:4px}
+  .topic-list{grid-column:2;grid-row:2;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+  .topic-list::-webkit-scrollbar{display:none}
+  .topic-nav,.topic-nav.selected{width:auto;flex:none;padding:6px 8px;font-size:10px;gap:6px;border:1px solid #efedea;background:#fff}
+  .topic-nav.selected{background:#fff1ec;border-color:#f5d9cd;color:#bc5638}
+  .topic-count{display:inline;margin-left:1px;font-size:9px}
+  .topic-create{grid-column:1/-1;grid-row:3;margin:0}
+  .main-content{width:100%}
+  .topbar{height:48px;padding:0 14px}
+  .content-wrap{padding:19px 14px 20px}
+  .welcome{min-height:110px}
+  .welcome h1{font-size:29px}
+  .welcome p{font-size:11px;max-width:300px}
+  .metrics{margin:12px 0 24px}
+  .flow-panel{gap:5px}
+  .flow-node{min-height:85px}
+  .lower-grid{grid-template-columns:minmax(0,1fr)}
+  .publish-panel,.messages-panel{padding:15px}
+  .messages-panel{min-height:330px}
+  .publish-panel form label{font-size:9px}
+  .publish-panel textarea{height:96px}
+  .consumer-stack{grid-template-columns:1fr 1fr}
+  footer{gap:8px;align-items:center;font-size:8px}
+}
+@media(max-width:380px){
+  .content-wrap{padding-right:11px;padding-left:11px}
+  .welcome h1{font-size:26px}
+  .consumer-stack{grid-template-columns:1fr}
+  .metrics{gap:7px}
+  .metric-card{padding:11px;min-height:100px}
+  .metric-label{left:45px}
+}
