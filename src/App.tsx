@@ -139,6 +139,14 @@ function App() {
         <div className="content-wrap">
           <section className="welcome"><div><div className="eyebrow">AMBIENTE DE ESTUDO <span>·</span> 01</div><h1>Kafka, na prática.</h1><p>Explore tópicos, publique mensagens e acompanhe o fluxo entre produtores e consumidores.</p></div><div className="welcome-art" aria-hidden="true"><div className="orbit orbit-one"/><div className="orbit orbit-two"/><span>✳</span><i className="spark spark-a"/><i className="spark spark-b"/></div></section>
 
+          <section className="how-it-works" aria-label="Como usar o simulador">
+            <div className="how-title"><span>COMECE AQUI</span><b>Como funciona</b><small>Faça um teste em três passos</small></div>
+            <div className="how-step"><i>1</i><p><b>Escolha um tópico</b><small>Ex.: pedidos, usuarios ou notificacoes.</small></p></div>
+            <div className="how-step"><i>2</i><p><b>Revise a mensagem</b><small>O modelo muda com o tópico. Chave igual → mesma partição.</small></p></div>
+            <div className="how-step"><i>3</i><p><b>Publique e acompanhe</b><small>A confirmação mostra partição e offset; veja a mensagem no stream.</small></p></div>
+            <div className="simulation-note"><span>ⓘ</span> É uma simulação didática no navegador. Os dados ficam neste aparelho; nenhum Kafka real é conectado.</div>
+          </section>
+
           <section className="metrics" aria-label="Resumo do workspace"><article className="metric-card"><div className="metric-icon orange">▤</div><span className="metric-label">TÓPICOS</span><strong>{topics.length.toString().padStart(2, '0')}</strong><small>no workspace</small></article><article className="metric-card"><div className="metric-icon blue">▧</div><span className="metric-label">MENSAGENS</span><strong>{totalMessages.toString().padStart(2, '0')}</strong><small>mensagens publicadas</small></article><article className="metric-card"><div className="metric-icon violet">⌘</div><span className="metric-label">CONSUMIDORES</span><strong>02</strong><small>em 2 consumer groups</small></article><article className="metric-card broker-card"><div className="metric-icon green">⌁</div><span className="metric-label">BROKER</span><strong className="broker-state"><i /> Online</strong><small>simulador no navegador</small></article></section>
 
           <div className="section-heading"><div><h2>Fluxo de mensagens</h2><p>Publique uma mensagem e veja como ela percorre o sistema.</p></div><span className="live-pill"><i /> AO VIVO</span></div>
