@@ -91,4 +91,6 @@ body{background:#171513;color:#eee8e3}
 ::selection{background:#87503b;color:white}
 .reset-button{border:1px solid #49413b;background:transparent;color:#bfb5ac;border-radius:5px;padding:6px 8px;font-size:9px}
 .reset-button:hover{border-color:#d87855;color:#f0a17d}
+.notice-banner{margin:11px 0 0;padding:11px 12px;border:1px solid #37634b;border-radius:6px;background:#22362b;color:#a9e2be;font-size:11px;font-weight:600;line-height:1.45;box-shadow:0 3px 10px #0002;animation:notice-in .18s ease-out}
+@keyframes notice-in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:600px){.top-right{gap:8px}.reset-button{font-size:8px;padding:6px}.simulation{white-space:nowrap}}
