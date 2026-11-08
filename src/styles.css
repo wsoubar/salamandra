@@ -3,3 +3,57 @@
 @media(min-width:900px){.shopping-content{padding-top:42px}.add-card{padding:21px}.summary-card{padding:21px 23px}.shopping-item{min-height:72px}}
 @media(max-width:430px){.app-header{height:60px;padding:0 16px}.shopping-content{width:calc(100% - 30px);padding:23px 0 24px}.shopping-intro{margin-bottom:17px}.shopping-intro h1{font-size:28px}.shopping-intro p{font-size:11px}.summary-card{padding:15px}.summary-card>strong{font-size:28px}.add-card{padding:15px;margin-top:13px}.optional-fields{grid-template-columns:96px 1fr;gap:8px}.compact-field>span{font-size:8px}.filter-tabs button{font-size:9px}.shopping-item{gap:9px;padding:8px}.item-total{font-size:9px}.remove-button{width:24px}.app-footer{align-items:flex-start;font-size:8px}.app-footer button{font-size:8px;white-space:nowrap}}
 @media(max-width:360px){.saved-indicator{font-size:0}.saved-indicator i{width:8px;height:8px}.optional-fields{grid-template-columns:88px 1fr}.filter-tabs button{font-size:8px}.item-copy b{font-size:11px}}
+/* Refined near-black palette with restrained warm accent and stronger surface hierarchy. */
+:root{background:#0b0c0e;color:#f4f5f6}
+body{background:#0b0c0e}
+.app-header{background:#101114;border-color:#23252a}
+.shopping-content{max-width:620px}
+.brand-mark{background:linear-gradient(145deg,#ff744f,#dd4d31);box-shadow:0 5px 15px #ef65402a}
+.app-brand{color:#f5f4f3;letter-spacing:-.02em}
+.saved-indicator{color:#969ba3}
+.shopping-intro h1{color:#f5f6f7;letter-spacing:-.065em}
+.shopping-intro p{color:#9ba0a8}
+.intro-kicker{color:#f18a68}
+.summary-card{background:radial-gradient(ellipse at 92% -15%,#422319 0,transparent 52%),linear-gradient(115deg,#201713,#151311 80%);border-color:#38241d;box-shadow:0 12px 30px #0004,inset 0 1px #ffffff08}
+.summary-top>span:first-child{color:#c9a89a}
+.summary-card>strong{color:#fff9f5}
+.summary-bottom{color:#b1a198}
+.summary-separator{background:#634536}
+.progress-track{background:#392a24}
+.progress-track span{background:linear-gradient(90deg,#f08a5f,#ffb16f)}
+.add-card,.item-list{background:#131518;border-color:#25282d;box-shadow:0 7px 22px #0003,inset 0 1px #ffffff05}
+.section-title h2,.list-heading h2{color:#f1f2f3}
+.section-title p,.list-heading p{color:#949aa2}
+.title-icon{background:#2b1d18;color:#ff946d}
+.field-label,.compact-field>span{color:#a8adb4}
+.name-input,.compact-field input,.price-input{background:#0e1012;border-color:#30343a;color:#f3f4f5}
+.name-input:focus,.compact-field input:focus,.price-input:focus-within{border-color:#e47652;box-shadow:0 0 0 3px #e4765218}
+.name-input::placeholder,.compact-field input::placeholder{color:#707780}
+.price-input>span{color:#a0a5ad}
+.add-button{background:linear-gradient(135deg,#f06d48,#de5435);box-shadow:0 6px 16px #e45a3830;color:#fff}
+.add-button:hover{filter:brightness(1.06)}
+.form-message{color:#91d3aa}
+.list-heading h2 span{background:#25282d;color:#b3b8bf}
+.clear-button,.app-footer button{border-color:#34383e;color:#ed9878}
+.clear-button:hover,.app-footer button:hover{background:#271b17;border-color:#664333}
+.filter-tabs{background:#111316;border-color:#272a2f}
+.filter-tabs button{color:#979da5}
+.filter-tabs button.active{background:#302019;color:#ffab89;box-shadow:inset 0 0 0 1px #523326}
+.item-list{background:#131518;border-color:#282b30}
+.shopping-item{border-color:#25282d}
+.check-button{border-color:#60666e;background:#101215}
+.check-button:hover{border-color:#8b9a90}
+.check-button[aria-pressed=true]{border-color:#65c58e;background:#65c58e;color:#102117;box-shadow:0 0 12px #65c58e30}
+.item-copy b{color:#eceef0}
+.item-copy small{color:#9399a1}
+.item-total{color:#dce0e4}
+.item-total span,.remove-button{color:#838991}
+.remove-button:hover{color:#ff9472;background:#241916;border-radius:6px}
+.shopping-item.checked .item-copy b{color:#858b92}
+.shopping-item.checked .item-total{color:#8d949b}
+.total-note,.app-footer{color:#858b93}
+.empty-list{color:#949ba4}
+.empty-list>span{background:#24272c;color:#f09872}
+.empty-list b{color:#e1e4e7}
+.app-footer{border-color:#25282d}
+::selection{background:#8e4932;color:#fff}
