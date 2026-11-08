@@ -20,6 +20,28 @@ const consumers = [
   { name: 'analytics-worker', group: 'analytics', color: 'blue', topics: ['pedidos'] },
 ]
 
+const topicTemplates: Record<string, { key: string; value: string }> = {
+  pedidos: {
+    key: 'pedido-1045',
+    value: JSON.stringify({ evento: 'pedido-criado', pedidoId: 'pedido-1045', clienteId: 'cliente-208', total: 53.3 }, null, 2),
+  },
+  usuarios: {
+    key: 'user-309',
+    value: JSON.stringify({ evento: 'usuario-cadastrado', usuarioId: 'user-309', nome: 'Marina Costa', email: 'marina@example.com', cidade: 'Recife' }, null, 2),
+  },
+  notificacoes: {
+    key: 'pedido-1045',
+    value: JSON.stringify({ evento: 'entrega-atualizada', pedidoId: 'pedido-1045', status: 'saiu-para-entrega', previsao: '2026-11-10T18:00:00Z' }, null, 2),
+  },
+}
+
+function templateForTopic(name: string) {
+  return topicTemplates[name] ?? {
+    key: `${name}-exemplo`,
+    value: JSON.stringify({ evento: 'exemplo', topico: name, mensagem: 'Olá, Kafka!' }, null, 2),
+  }
+}
+
 const STORAGE_KEY = 'salamandra-kafka-playground-v1'
 
 function loadTopics(): Topic[] {
@@ -39,8 +61,8 @@ function loadTopics(): Topic[] {
 function App() {
   const [topics, setTopics] = useState<Topic[]>(loadTopics)
   const [selected, setSelected] = useState('pedidos')
-  const [key, setKey] = useState('')
-  const [value, setValue] = useState('{\n  "evento": "novo-pedido",\n  "total": 0\n}')
+  const [key, setKey] = useState(() => templateForTopic('pedidos').key)
+  const [value, setValue] = useState(() => templateForTopic('pedidos').value)
   const [notice, setNotice] = useState('')
   const [showTopicForm, setShowTopicForm] = useState(false)
   const [topicName, setTopicName] = useState('')
@@ -59,7 +81,18 @@ function App() {
   function resetPlayground() {
     setTopics(initialTopics)
     setSelected('pedidos')
+    setKey(templateForTopic('pedidos').key)
+    setValue(templateForTopic('pedidos').value)
     setNotice('Dados de exemplo restaurados.')
+    window.setTimeout(() => setNotice(''), 3600)
+  }
+
+  function selectTopic(name: string) {
+    setSelected(name)
+    const template = templateForTopic(name)
+    setKey(template.key)
+    setValue(template.value)
+    setNotice(`Modelo de mensagem carregado para o tópico ${name}.`)
     window.setTimeout(() => setNotice(''), 3600)
   }
 
@@ -97,7 +130,7 @@ function App() {
         <button className="nav-item active"><span>▦</span> Visão geral</button>
         <div className="side-label topic-label">TÓPICOS <button aria-label="Criar tópico" onClick={() => setShowTopicForm((open) => !open)}>＋</button></div>
         {showTopicForm && <form className="topic-create" onSubmit={createTopic}><input autoFocus aria-label="Nome do tópico" placeholder="nome-do-topico" value={topicName} onChange={(event) => setTopicName(event.target.value)} /><button aria-label="Salvar tópico">↵</button></form>}
-        <div className="topic-list">{topics.map((item) => <button key={item.name} className={`topic-nav ${selected === item.name ? 'selected' : ''}`} onClick={() => setSelected(item.name)}><span className="topic-dot" />{item.name}<span className="topic-count">{item.messages.length}</span></button>)}</div>
+        <div className="topic-list">{topics.map((item) => <button key={item.name} className={`topic-nav ${selected === item.name ? 'selected' : ''}`} onClick={() => selectTopic(item.name)}><span className="topic-dot" />{item.name}<span className="topic-count">{item.messages.length}</span></button>)}</div>
         <div className="side-bottom"><span className="online-dot" /> Broker simulado <span className="local-tag">LOCAL</span></div>
       </aside>
 
@@ -117,7 +150,7 @@ function App() {
             <div className="consumer-stack">{consumers.map((consumer) => <div className="consumer-node" key={consumer.name}><span className={`consumer-icon ${consumer.color}`}>⇥</span><div><h3>{consumer.name}</h3><p>{consumer.group}</p></div><span className="consumer-active">●</span></div>)}</div>
           </section>
 
-          <div className="lower-grid"><section className="publish-panel"><div className="panel-heading"><div><span className="panel-kicker">PRODUCER</span><h2>Publicar mensagem</h2></div><span className="code-tag">JSON</span></div><form onSubmit={publish}><label htmlFor="topic-select">TÓPICO</label><select id="topic-select" value={selected} onChange={(event) => setSelected(event.target.value)}>{topics.map((item) => <option key={item.name} value={item.name}>{item.name}</option>)}</select><label htmlFor="message-key">CHAVE <span>opcional · mesma chave vai para a mesma partição</span></label><input id="message-key" placeholder="ex: pedido-1045" value={key} onChange={(event) => setKey(event.target.value)} /><label htmlFor="message-value">VALOR <span>JSON</span></label><textarea id="message-value" spellCheck={false} value={value} onChange={(event) => setValue(event.target.value)} /><button className="publish-button" type="submit"><span>↗</span> Publicar mensagem</button>{notice && <p className="notice" role="status">{notice}</p>}</form><div className="learning-note"><span>✳</span><p><b>Sabia disso?</b> Mensagens com a mesma chave são sempre direcionadas à mesma partição, mantendo a ordem.</p></div></section>
+          <div className="lower-grid"><section className="publish-panel"><div className="panel-heading"><div><span className="panel-kicker">PRODUCER</span><h2>Publicar mensagem</h2></div><span className="code-tag">JSON</span></div><form onSubmit={publish}><label htmlFor="topic-select">TÓPICO</label><select id="topic-select" value={selected} onChange={(event) => selectTopic(event.target.value)}>{topics.map((item) => <option key={item.name} value={item.name}>{item.name}</option>)}</select><label htmlFor="message-key">CHAVE <span>opcional · mesma chave vai para a mesma partição</span></label><input id="message-key" placeholder="ex: pedido-1045" value={key} onChange={(event) => setKey(event.target.value)} /><label htmlFor="message-value">VALOR <span>JSON</span></label><textarea id="message-value" spellCheck={false} value={value} onChange={(event) => setValue(event.target.value)} /><button className="publish-button" type="submit"><span>↗</span> Publicar mensagem</button>{notice && <p className="notice" role="status">{notice}</p>}</form><div className="learning-note"><span>✳</span><p><b>Sabia disso?</b> Mensagens com a mesma chave são sempre direcionadas à mesma partição, mantendo a ordem.</p></div></section>
 
           <section className="messages-panel"><div className="panel-heading messages-heading"><div><span className="panel-kicker">STREAM</span><h2>Mensagens recentes <span className="message-total">{topic.messages.length}</span></h2></div><button className={`pause-button ${paused ? 'is-paused' : ''}`} onClick={() => setPaused((state) => !state)}>{paused ? '▶ Retomar' : 'Ⅱ Pausar'}</button></div><div className="message-list">{paused ? <div className="empty-state"><span>Ⅱ</span><b>Stream pausado</b><small>Retome para acompanhar novas mensagens.</small></div> : topic.messages.length === 0 ? <div className="empty-state"><span>⌁</span><b>Nenhuma mensagem ainda</b><small>Publique uma mensagem para vê-la aqui.</small></div> : topic.messages.map((message) => <article className="message-item" key={message.id}><div className="message-marker">↙</div><div className="message-body"><div className="message-meta"><code>{message.key}</code><time>{message.time}</time></div><pre>{message.value}</pre><div className="message-coords"><span>partição <b>{message.partition}</b></span><span>offset <b>{message.offset}</b></span></div></div></article>)}</div><button className="view-all" onClick={() => setNotice('Você está vendo todas as mensagens recentes deste tópico.')}>Ver todas as mensagens <span>→</span></button></section></div>
           <footer>Feito para aprender, sem precisar de um broker. <span>Kafka playground <b>✳</b></span></footer>
