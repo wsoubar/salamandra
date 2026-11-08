@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 type Message = { id: number; key: string; value: string; time: string; partition: number; offset: number }
 type Topic = { name: string; partitions: number; messages: Message[] }
@@ -20,8 +20,24 @@ const consumers = [
   { name: 'analytics-worker', group: 'analytics', color: 'blue', topics: ['pedidos'] },
 ]
 
+const STORAGE_KEY = 'salamandra-kafka-playground-v1'
+
+function loadTopics(): Topic[] {
+  try {
+    const stored = window.localStorage.getItem(STORAGE_KEY)
+    if (!stored) return initialTopics
+    const parsed: unknown = JSON.parse(stored)
+    if (!Array.isArray(parsed) || !parsed.every((item) =>
+      typeof item?.name === 'string' && Number.isInteger(item?.partitions) &&
+      item.partitions > 0 && Array.isArray(item?.messages))) return initialTopics
+    return parsed as Topic[]
+  } catch {
+    return initialTopics
+  }
+}
+
 function App() {
-  const [topics, setTopics] = useState(initialTopics)
+  const [topics, setTopics] = useState<Topic[]>(loadTopics)
   const [selected, setSelected] = useState('pedidos')
   const [key, setKey] = useState('')
   const [value, setValue] = useState('{\n  "evento": "novo-pedido",\n  "total": 0\n}')
@@ -31,6 +47,21 @@ function App() {
   const [paused, setPaused] = useState(false)
   const topic = topics.find((item) => item.name === selected) ?? topics[0]
   const totalMessages = useMemo(() => topics.reduce((sum, item) => sum + item.messages.length, 0), [topics])
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(topics))
+    } catch {
+      setNotice('Não foi possível salvar neste navegador. O armazenamento pode estar cheio ou desativado.')
+    }
+  }, [topics])
+
+  function resetPlayground() {
+    setTopics(initialTopics)
+    setSelected('pedidos')
+    setNotice('Dados de exemplo restaurados.')
+    window.setTimeout(() => setNotice(''), 3600)
+  }
 
   function publish(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -71,7 +102,7 @@ function App() {
       </aside>
 
       <main className="main-content">
-        <header className="topbar"><div className="breadcrumb">Playground <span>/</span> <b>Visão geral</b></div><div className="top-right"><span className="simulation"><i /> simulação local</span><button className="avatar" title="Perfil">S</button></div></header>
+        <header className="topbar"><div className="breadcrumb">Playground <span>/</span> <b>Visão geral</b></div><div className="top-right"><button className="reset-button" onClick={resetPlayground}>Restaurar exemplos</button><span className="simulation"><i /> simulação local</span><button className="avatar" title="Perfil">S</button></div></header>
         <div className="content-wrap">
           <section className="welcome"><div><div className="eyebrow">AMBIENTE DE ESTUDO <span>·</span> 01</div><h1>Kafka, na prática.</h1><p>Explore tópicos, publique mensagens e acompanhe o fluxo entre produtores e consumidores.</p></div><div className="welcome-art" aria-hidden="true"><div className="orbit orbit-one"/><div className="orbit orbit-two"/><span>✳</span><i className="spark spark-a"/><i className="spark spark-b"/></div></section>
 
