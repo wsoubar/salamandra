@@ -89,3 +89,6 @@ body{background:#171513;color:#eee8e3}
 .welcome-art .orbit{border-color:#4e3930}
 .spark{background:#df754f}
 ::selection{background:#87503b;color:white}
+.reset-button{border:1px solid #49413b;background:transparent;color:#bfb5ac;border-radius:5px;padding:6px 8px;font-size:9px}
+.reset-button:hover{border-color:#d87855;color:#f0a17d}
+@media(max-width:600px){.top-right{gap:8px}.reset-button{font-size:8px;padding:6px}.simulation{white-space:nowrap}}
